@@ -15,6 +15,7 @@ class CrossEntropyLoss(Loss):
 
     def __call__(self, xs, ys):
         logits = self.model.logits(xs)
+        logits = tf.Print(logits, [logits], "logits:")
         loss = tf.nn.sparse_softmax_cross_entropy_with_logits(labels=ys, logits=logits)
         return loss
 

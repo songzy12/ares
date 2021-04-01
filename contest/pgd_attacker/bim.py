@@ -76,6 +76,7 @@ class BIM(BatchAttack):
             raise NotImplementedError
         # clip by (x_min, x_max)
         xs_adv_next = tf.clip_by_value(xs_adv_next, self.model.x_min, self.model.x_max)
+        xs_adv_next = tf.Print(xs_adv_next, [xs_adv_next, self.loss], "xs_adv_next & loss:")
 
         self.update_xs_adv_step = self.xs_adv_var.assign(xs_adv_next)
         self.config_eps_step = self.eps_var.assign(self.eps_ph)
